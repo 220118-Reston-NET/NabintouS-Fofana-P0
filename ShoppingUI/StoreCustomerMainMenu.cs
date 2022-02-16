@@ -13,7 +13,7 @@ namespace ShoppingUI
             Console.WriteLine(" ");
             Console.WriteLine("[5] Go back");
             Console.WriteLine("[4] Search product");
-            Console.WriteLine("[3] See all products");
+           // Console.WriteLine("[3] See all products");
             Console.WriteLine("[2] Order History");
             Console.WriteLine("[1] Place Order");
             Console.WriteLine("[0] Exit");
@@ -29,8 +29,8 @@ namespace ShoppingUI
                 case "1":
                     return MenuType.PlaceOrderMenu;
                 case "2":
-                    return MenuType.OrderHistory;
-                case "3":
+                 //   return MenuType.OrderHistory;
+               // case "3":
                     return MenuType.GetStoreFrontProducts;
                 case "4":
                     return MenuType.SearchProduct;

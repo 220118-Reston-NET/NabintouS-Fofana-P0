@@ -163,13 +163,13 @@ namespace ShoppingBL
         {
             
             List<Order> listOfOrder = _repo_o.GetAllOrder();
-            if(listOfOrder.Count < 500)
+            if(listOfOrder.Count < 100)
             {
                 return _repo_o.AddOrder(b_order);
             }
             else
             {
-                throw new Exception("You cannot have more than 500 orders!");
+                throw new Exception("You cannot have more than 5 orders!");
             }
         
         }

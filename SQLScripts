@@ -227,10 +227,6 @@ select * from Customer c
 select * from Product p 
 select * from LineItems li 
 
-select a.abName, p.pokeName from Ability a 
-inner join abilities_pokemons ap on a.abId = ap.abId 
-inner join Pokemon p on p.pokeId = ap.pokeId 
-
 select sf.storeID ,o.orderID from StoreFront sf 
 inner join storeFront_orders sfo on sf.storeID = sfo.storeID 
 inner join Orders o on o.orderID = sfo.orderID 

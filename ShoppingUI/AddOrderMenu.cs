@@ -53,7 +53,7 @@ namespace ShoppingUI
                     }
                     catch (System.Exception exc)
                     {
-                        Log.Warning("Failed to add book due to reaching total capacity (500)");
+                        Log.Warning("Failed to add book due to reaching total capacity (100)");
                         Console.WriteLine(exc.Message);
                         Console.WriteLine("Please press Enter to continue");
                         Console.ReadLine();
