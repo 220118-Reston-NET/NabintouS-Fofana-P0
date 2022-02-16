@@ -1,4 +1,4 @@
-namespace ShopUI
+namespace ShoppingUI
 {
     public class GeneralMenu : IMenu
     {
@@ -30,9 +30,9 @@ namespace ShopUI
                 case "0":
                     return MenuType.Exit;
                 case "1":
-                    return MenuType.StoreCustomerMainMenu;
+                    return MenuType.CustomerMainMenu;
                 case "2":
-                    return MenuType.StoreManagerMainMenu;
+                    return MenuType.ManagerMainMenu;
                 default:
                     Console.WriteLine("Please input a valid response");
                     Console.WriteLine("Please press Enter to continue");

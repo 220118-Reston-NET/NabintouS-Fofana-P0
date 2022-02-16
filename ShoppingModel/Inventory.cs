@@ -1,4 +1,4 @@
-namespace ShopModel
+namespace ShoppingModel
 {
   public class Inventory
   {

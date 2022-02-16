@@ -1,10 +1,10 @@
-﻿global using Serilog;
+﻿// See https://aka.ms/new-console-template for more information
+global using Serilog;
 using Microsoft.Extensions.Configuration;
-//using ShopBL;
-//using ShopDL;
-using ShopUI;
+using ShoppingBL;
+using ShoppingDL;
+using ShoppingUI;
 
-/*
 //Creating and configuring our logger
 Log.Logger = new LoggerConfiguration()
     .WriteTo.File("logs/user.txt") //We configure our logger to save in this file
@@ -17,7 +17,7 @@ var configuration = new ConfigurationBuilder()
 
 string _connectionStrings = configuration.GetConnectionString("Reference2DBKey");
 
-*/
+
 bool repeat = true;
 //IMenu menu = new MainMenu();
 IMenu menu = new GeneralMenu();
@@ -35,7 +35,6 @@ while (repeat)
             Log.Information("Displaying general mainMenu to user");
             menu = new GeneralMenu();
             break;
-            /*
         case MenuType.AddProduct:
             Log.Information("Displaying AddProduct Menu to user");
             menu = new AddProductMenu(new ProductBL(new SQLRepository_p(_connectionStrings)));
@@ -51,19 +50,29 @@ while (repeat)
             menu = new AddOrderMenu(new OrderBL(new SQLRepository_o(_connectionStrings)));
             break;
             
-        case MenuType.GetStoreProducts:
+        case MenuType.GetAllProducts:
             Log.Information("Displaying AddOrder Menu to user");
-            menu = new GetStoreProducts(new ProductBL(new SQLRepository_p(_connectionStrings)));
+            menu = new GetAllProducts(new ProductBL(new SQLRepository_p(_connectionStrings)));
             break;
             
-        case MenuType.GetProduct:
+        case MenuType.GetOrderLineitems:
             Log.Information("Displaying AddOrder Menu to user");
-            menu = new GetProduct(new ProductBL(new SQLRepository_p(_connectionStrings)));
+            menu = new GetOrderLineItem(new OrderBL(new SQLRepository_o(_connectionStrings)));
             break;
-            /*
-        case MenuType.GetStoreProducts:
+            
+        case MenuType.GetStoreFrontProducts:
             Log.Information("Displaying AddOrder Menu to user");
-            menu = new GetStoreProducts(new ProductBL(new SQLRepository_p(_connectionStrings)));
+            menu = new GetStoreFrontProducts(new StoreFrontBL(new SQLRepository_s(_connectionStrings)));
+            break;
+
+        case MenuType.GetStoreFrontInventory:
+            Log.Information("Displaying AddOrder Menu to user");
+            menu = new GetStoreFrontInventory(new StoreFrontBL(new SQLRepository_s(_connectionStrings)));
+            break;
+            
+        case MenuType.GetStoreFrontOrders:
+            Log.Information("Displaying AddOrder Menu to user");
+            menu = new GetStoreFrontOrders(new StoreFrontBL(new SQLRepository_s(_connectionStrings)));
             break;
             
         
@@ -76,10 +85,10 @@ while (repeat)
             Log.Information("Displaying SearchCustomer Menu to user");
             menu = new SearchCustomerMenu(new CustomerBL(new SQLRepository_c(_connectionStrings)));
             break;
-            /*
-        case MenuType.AddLineItems:
+            
+        case MenuType.AddLineItemsMenu:
             Log.Information("Displaying SearchCustomer Menu to user");
-            menu = new AddLineItemsMenu(new OrderBL(new SQLRepository_o(_connectionStrings)));
+            menu = new AddLineItemsMenu(new LineItemsBL(new SQLRepository_i(_connectionStrings)));
             break;
            
         case MenuType.SearchProduct:
@@ -91,49 +100,42 @@ while (repeat)
             Log.Information("Displaying Inventory Menu to user");
             menu = new AddInventoryMenu(new InventoryBL(new SQLRepository_v(_connectionStrings)));
             break;
-        case MenuType.ViewInventory:
-            Log.Information("Displaying Inventory to user");
-            menu = new ViewInventory(new InventoryBL(new SQLRepository_v(_connectionStrings)));
-            break;
-            
+        
         case MenuType.PlaceOrderMenu:
             Log.Information("Displaying product quality to user");
-            menu = new PlaceOrderMenu(new OrderBL(new SQLRepository_o(_connectionStrings)));
+            menu = new PlaceOrderMenu(new CustomerBL(new SQLRepository_c(_connectionStrings)));
             break;
-            */
-            
-        case MenuType.StoreCustomerMainMenu:
+        
+        case MenuType.CustomerMainMenu:
             Log.Information("Displaying customer mainMenu to user");
             menu = new StoreCustomerMainMenu();
             break;
             
-        case MenuType.StoreManagerMainMenu:
+        case MenuType.ManagerMainMenu:
             Log.Information("Displaying manager mainMenu to user");
             menu = new StoreManagerMainMenu();
             break;
-            /*
-        case MenuType.ReplenishInventory:
+            
+        case MenuType.Replenishinventory:
             Log.Information("Displaying the Replenish Inventory Menu");
-            menu = new ReplenishinventoryMenu(new ProductBL(new SQLRepository_p(_connectionStrings)), new InventoryBL(new SQLRepository_v(_connectionStrings)));
+            menu = new Replenishinventory(new StoreFrontBL(new SQLRepository_s(_connectionStrings)));
             break;
             
-        /*
-        case MenuType.GetStoreOrder:
+        
+        case MenuType.GetOrderLineItem:
             Log.Information("Displaying Customer MainMenu to user");
-            menu = new GetStoreOrder(new OrderBL(new Repository_o()));
+            menu = new GetOrderLineItem(new OrderBL(new SQLRepository_o(_connectionStrings)));
             break;
-            
+        
         case MenuType.OrderHistory:
             Log.Information("Displaying customer order to user");
-            menu = new GetCustomerOrder(new OrderBL(new SQLRepository_o(_connectionStrings)));
+            menu = new GetCustomerOrder(new CustomerBL(new SQLRepository_c(_connectionStrings)));
             break;
-            */
         case MenuType.Exit:
             Log.Information("Exiting application");
             Log.CloseAndFlush(); //To close our logger resource
             repeat = false;
             break;
-            
         default:
             Console.WriteLine("Page does not exist!");
             Console.WriteLine("Please press Enter to continue");
@@ -145,4 +147,3 @@ while (repeat)
 
 
    
-

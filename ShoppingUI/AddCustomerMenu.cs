@@ -1,7 +1,7 @@
 using ShoppingBL;
 using ShoppingModel;
 
-namespace ShopUI
+namespace ShoppingUI
 {
     public class AddCustomerMenu : IMenu
     {
@@ -39,25 +39,14 @@ namespace ShopUI
                 case "0":
                     return MenuType.GeneralMenu;
                 case "1":
-                    //Exception handling to have a better user experience
                     
-                    try
-                    {
-                        Log.Information("Adding new customer " + _newCustomer);
+                    Log.Information("Adding new customer " + _newCustomer);
                         _customerBL.AddCustomer(_newCustomer);
                         Console.WriteLine("Customer added");
                         Log.Information("Successful at adding customer!");
                         Console.WriteLine("Please press Enter to go back to the previous menu");
                         Console.ReadLine();
-                    }
-                    catch (System.Exception exc)
-                    {
-                        Log.Warning("Failed to add customer due to reaching total capacity (20)");
-                        Console.WriteLine(exc.Message);
-                        Console.WriteLine("Please press Enter to continue");
-                        Console.ReadLine();
-                    }
-                    return MenuType.GeneralMenu;
+                    return MenuType.ManagerMainMenu;
                 case "2":
                     Console.WriteLine("Please enter the customer id!");
                     _newCustomer.CustomerID = Console.ReadLine();

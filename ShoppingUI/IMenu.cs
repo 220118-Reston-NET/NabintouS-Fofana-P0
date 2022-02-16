@@ -1,21 +1,22 @@
-namespace ShopUI
+namespace ShoppingUI
 {
     public enum MenuType
     {
+        MainMenu,
         GeneralMenu,
-        StoreManagerMainMenu,
-        StoreCustomerMainMenu,
+        ManagerMainMenu,
+        CustomerMainMenu,
         Exit,
-        
         AddProduct,
         SearchProduct,
         AddCustomer,
         SearchCustomer,
         AddOrder,
         AddStoreFront,
-        AddLineItems,
+        AddLineItemsMenu,
         AddInventory,
         ViewInventory,
+        ViewInventory2,
         PlaceOrder,
         PlaceOrderMenu,  
         AddProductQuality,
@@ -23,7 +24,7 @@ namespace ShopUI
         GetStoreProduct,
         OrderHistory,
         GetProduct,
-        GetStoreProducts,
+        GetAllProducts,
         GetProductDetail,
         StoreCustomerMenu,
         StoreManagerMenu,
@@ -31,7 +32,13 @@ namespace ShopUI
         listOfStores,
         ReplenishInventory,
         ViewInventoryStoreByID,
-    
+        Replenishinventory,
+        Stores,
+        GetOrderLineItem,
+        GetOrderLineitems,
+        GetStoreFrontOrders,
+        GetStoreFrontProducts,
+        GetStoreFrontInventory,
     }
 
     public interface IMenu
@@ -49,6 +56,8 @@ namespace ShopUI
         /// <returns>Return the menu that will change your screen</returns>
          MenuType UserChoice();
     }
+
+    //public interface ICustomerMenu{
 
     //}
     

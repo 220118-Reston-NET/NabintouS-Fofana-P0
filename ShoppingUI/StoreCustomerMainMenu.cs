@@ -1,4 +1,4 @@
-namespace ShopUI
+namespace ShoppingUI
 {
     public class StoreCustomerMainMenu : IMenu
     {
@@ -12,12 +12,10 @@ namespace ShopUI
             Console.WriteLine("What would you like to do?");
             Console.WriteLine(" ");
             Console.WriteLine("[5] Go back");
-            /*
             Console.WriteLine("[4] Search product");
             Console.WriteLine("[3] See all products");
-            //Console.WriteLine("[2] Order History");
+            Console.WriteLine("[2] Order History");
             Console.WriteLine("[1] Place Order");
-            */
             Console.WriteLine("[0] Exit");
             }
         public MenuType UserChoice()
@@ -28,17 +26,14 @@ namespace ShopUI
             {
                 case "0":
                     return MenuType.Exit;
-                    /*
                 case "1":
                     return MenuType.PlaceOrderMenu;
-               // case "2":
-                 //   return MenuType.OrderHistory;
+                case "2":
+                    return MenuType.GetCustomerOrder;
                 case "3":
-                    return MenuType.GetProduct;
+                    return MenuType.GetAllProducts;
                 case "4":
                     return MenuType.SearchProduct;
-                    */
-                    
                 case "5":
                     return MenuType.GeneralMenu;
                 default:
