@@ -21,9 +21,8 @@ namespace ShoppingUI
 
         public void Display()
         {
-            Console.WriteLine("===Place Order Menu===");
-            Console.WriteLine("Did you want to place an order?");
-            Console.WriteLine("Enter Y for yes or N for no:");
+            Console.WriteLine("[1] PLACE ORDER");
+            Console.WriteLine("[0] Go back");
         }
 
         public MenuType UserChoice()
