@@ -1,0 +1,242 @@
+-----------------TABLES----------------------------
+-------1- Customer --------
+CREATE TABLE Customer(
+	customerID varchar(50) PRIMARY KEY,
+	customerName varchar(50),
+	customerAddress varchar(50),
+	customerEmail varchar(50)
+)
+
+-----------Drop PK-FK--------------
+--ALTER TABLE Customer 
+--DROP PK__Customer__B611CB9D349A9073;
+
+-----------Change data types---------
+--alter table Customer 
+--ALTER COLUMN customerID varchar(50);
+
+------------------------------------
+alter table Customer 
+drop column customerPhoneNumber;
+alter table Customer 
+
+
+insert into Customer 
+
+
+-------------2- StoreFront---------
+CREATE TABLE StoreFront(
+	storeID varchar(50) PRIMARY KEY,
+	storeName varchar(50),
+	storeLocation varchar(50) 
+)
+
+-----------Drop PK-FK--------------
+ALTER TABLE StoreFront  
+DROP PK__StoreFro__1EA71633252CF5B0;
+
+-----------Change data types---------
+alter table StoreFront 
+alter column storeID varchar(50);
+
+
+------------3- Product ---------------
+CREATE TABLE Product(
+	productID varchar(50) PRIMARY KEY,
+	productName varchar(50),
+	productDescription varchar(200),
+	productQuantity varchar(50),
+	productPrice int
+)
+
+-----------Drop PK-FK--------------
+ALTER TABLE Product  
+DROP PK__Product__2D10D14A7FAF1426;
+
+-----------Change data types---------
+alter table Product 
+alter column productID varchar(50);
+
+
+
+---------4- Order -------
+CREATE TABLE Orders(
+	orderID varchar(50) PRIMARY KEY,
+	customerID varchar(50), 
+	storeID varchar(50),
+	storeLocation varchar(50),
+	totalPrice int
+)
+-----------Drop PK-FK--------------
+ALTER TABLE Orders  
+--DROP PK__Orders__0809337DCC12C02E;
+--DROP FK__Orders__customer__68487DD7;
+--DROP FK__Orders__storeID__693CA210;
+
+-----------Change data types---------
+alter table Orders 
+--alter column orderID varchar(50);
+--alter column customerID varchar(50);
+alter column storeID varchar(50);
+
+-----------Add PK-FK-to existing column-------
+
+-------------add column----------------
+--alter table Orders 
+--add orderID varchar(50) primary key;
+
+--------5- LineItems -------
+CREATE TABLE LineItems(
+    lineitemID varchar(50),
+    orderID varchar(50),
+	productID varchar(50),
+	productName varchar(50),
+	productQuantity int,
+)
+-------------------------
+
+-----------Drop PK-FK--------------
+ALTER TABLE LineItems  
+DROP FK__LineItems__produ__619B8048;
+
+-----------Change data types---------
+alter table LineItems 
+--alter column productID varchar(50);
+alter column orderID varchar(50);
+
+-- -----------6- Inventory ------------
+CREATE TABLE Inventory(
+	inventoryID varchar(50) PRIMARY KEY,
+	storeID varchar(50),
+	storeName varchar(50),
+	productID varchar(50),
+	productName varchar(50),
+	productQuantity int
+)
+
+
+-----------Drop PK-FK--------------
+ALTER TABLE Inventory  
+--DROP PK__Inventor__C4B7BC2248DF701F;
+--DROP FK__Inventory__produ__656C112C
+DROP FK__Inventory__store__6477ECF3
+
+-----------Change data types---------
+alter table Inventory 
+--alter column InventoryID varchar(50);
+--alter column storeID varchar(50);
+alter column productID varchar(50);
+
+
+SELECT * FROM Product
+
+select * from Customer c 
+select * from StoreFront 
+select * FROM Inventory 
+
+
+create table customer_orders (
+	--The two minimum columns in a join table must either references the two tables you want a many to many relationship to have
+	customerID varchar(50) foreign key references Customer(customerID),
+	orderID varchar(50) foreign key references Orders(orderID)
+)
+
+insert into Customer 
+--values('1', 'Maria', '172 Second Street ,NJ', 'mariaaa@gmail.com' )
+values('2', 'Sandi', '90 Jewett Avenue Secaucus', 'sanndiii@outlook.com' )
+
+
+insert into Orders  
+--values('1', '1', '1', '123 Mill street ,NJ', 100 )
+values('2', '2', '2', 'Rose avenue ,TX', 50 )
+
+insert into customer_orders 
+--values (1, 1)
+values (2, 2)
+
+
+
+create table orders_lineitems (
+	--The two minimum columns in a join table must either references the two tables you want a many to many relationship to have
+	orderID varchar(50) foreign key references Orders(orderID),
+	lineitemID varchar(50) foreign key references LineItems(lineitemID)
+)
+
+
+insert into LineItems  
+--values('1', '1', '1', 'Body lotion', 3 )
+values('2', '2', '2', 'Body scrub', 1 )
+
+
+insert into orders_lineitems 
+--values (1, 1)
+values (2, 2)
+
+
+create table storeFront_orders (
+	--The two minimum columns in a join table must either references the two tables you want a many to many relationship to have
+	storeID varchar(50) foreign key references StoreFront(storeID),
+	orderID varchar(50) foreign key references Orders(orderID)
+)
+
+insert into StoreFront  
+--values('1', 'Fofky', 'Dallas, TX' )
+values('2', 'Karlaa', 'New York, NY' )
+
+
+insert into storeFront_orders 
+--values (1, 1)
+values (2, 2)
+
+
+
+create table storeFront_product (
+	--The two minimum columns in a join table must either references the two tables you want a many to many relationship to have
+	storeID varchar(50) foreign key references StoreFront(storeID),
+	productID varchar(50) foreign key references Product(productID)
+)
+
+insert into Product  
+--values('1', 'Body lotion', 'Body care', 25, 33  )
+values('2', 'Body scrub', 'Body care', 40, 50  )
+
+insert into storeFront_product 
+--values (1, 1)
+values (2, 2)
+
+
+
+create table storeFront_inventory (
+	--The two minimum columns in a join table must either references the two tables you want a many to many relationship to have
+	storeID varchar(50) foreign key references StoreFront(storeID),
+	InventoryID varchar(50) foreign key references Inventory(InventoryID)
+)
+
+insert into Inventory  
+--values('1', '1', 'Fofky', '1', 'Body lotion', 25  )
+values('2', '2', 'Karlaa', '2', 'Body scrub', 40  )
+
+insert into storeFront_inventory
+--values (1, 1)
+values (2, 2)
+
+select * from Orders o 
+select * from StoreFront sf 
+select * from Inventory i 
+select * from Customer c 
+select * from Product p 
+select * from LineItems li 
+
+select a.abName, p.pokeName from Ability a 
+inner join abilities_pokemons ap on a.abId = ap.abId 
+inner join Pokemon p on p.pokeId = ap.pokeId 
+
+select sf.storeID ,o.orderID from StoreFront sf 
+inner join storeFront_orders sfo on sf.storeID = sfo.storeID 
+inner join Orders o on o.orderID = sfo.orderID 
+
+
+
+select sf.storeID ,p.productID from StoreFront sf 
+inner join storeFront_product sfp on sf.storeID = sfp.storeID 
+inner join Product p on p.productID = sfp.productID 
