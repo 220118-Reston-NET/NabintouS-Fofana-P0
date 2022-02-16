@@ -6,7 +6,7 @@ public class LineItem
     public string OrderID { get; set; }
     public string ProductID { get; set; }
     public string ProductName { get; set; }
-    public int ProductQuantity { get; set; }
+    public string ProductQuantity { get; set; }
 
      public LineItem()
         {
@@ -14,7 +14,7 @@ public class LineItem
             OrderID = "";
             ProductID = "";
             ProductName = "";
-            ProductQuantity = 0;
+            ProductQuantity = "";
         }
         
         //ToString() method is the string version of your object

@@ -31,7 +31,7 @@ namespace ShoppingUI
             switch (userInput)
             {
                 case "0":
-                    return MenuType.GeneralMenu;
+                    return MenuType.ManagerMainMenu;
                 case "1":
                     Console.WriteLine("Enter StoreID:");
 
@@ -48,22 +48,22 @@ namespace ShoppingUI
                         Console.WriteLine("Please press Enter to continue");
                         Console.ReadLine();
 
-                        return MenuType.GeneralMenu;
+                        return MenuType.ManagerMainMenu;
                     }
                     catch (FormatException)
                     {
                         Console.WriteLine("Please input a valid response");
                         Console.WriteLine("Please press Enter to continue");
                         Console.ReadLine();
-                        return MenuType.GetStoreFrontOrders;
+                        return MenuType.GetStoreFrontInventory;
                     }
                     
-                    return MenuType.GetStoreFrontOrders;
+                    return MenuType.GetStoreFrontInventory;
                 default:
                     Console.WriteLine("Please input a valid response");
                     Console.WriteLine("Please press Enter to continue");
                     Console.ReadLine();
-                    return MenuType.GetStoreFrontOrders;
+                    return MenuType.GetStoreFrontInventory;
             }
         }
     }

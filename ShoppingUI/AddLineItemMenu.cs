@@ -39,12 +39,12 @@ namespace ShoppingUI
             switch (userInput)
             {
                case "0":
-                    return MenuType.GeneralMenu;
+                    return MenuType.ManagerMainMenu;
                case "1":
                     Log.Information("Adding product \n" + _newLineItem);
                         _LineItemsBL .AddLineItems(_newLineItem);
                         Log.Information("Successful at product!");
-                    return MenuType.GeneralMenu;
+                    return MenuType.ManagerMainMenu;
                 case "2":
                     Console.WriteLine("Please enter the lineitems id!");
                     _newLineItem.LineItemID = Console.ReadLine();
@@ -63,7 +63,7 @@ namespace ShoppingUI
                     return MenuType.AddLineItemsMenu;
                  case "6":
                     Console.WriteLine("Please enter the product quantity!");
-                    _newLineItem.ProductQuantity = Convert.ToInt32(Console.ReadLine());
+                    _newLineItem.ProductQuantity = Console.ReadLine();
                     return MenuType.AddLineItemsMenu;
                 default:
                     Console.WriteLine("Please input a valid response");

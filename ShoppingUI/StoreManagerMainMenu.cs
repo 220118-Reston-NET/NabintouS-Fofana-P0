@@ -21,11 +21,10 @@ namespace ShoppingUI
             Console.WriteLine("[9] Add Store inventory");
             Console.WriteLine("[10] View Store inventory");
             Console.WriteLine("[11] View Store order");
-            Console.WriteLine("[12] View all products");
-            Console.WriteLine("[13] View order history");
-            Console.WriteLine("[14] Get products from store");
-            Console.WriteLine("[15] Replenish inventory");
-            Console.WriteLine("[16] Go back");
+            Console.WriteLine("[12] View order history");
+            Console.WriteLine("[13] Get products from store");
+            Console.WriteLine("[14] Replenish inventory");
+            Console.WriteLine("[15] Go back");
             Console.WriteLine("[0] Exit");
         }
 
@@ -60,14 +59,12 @@ namespace ShoppingUI
                 case "11":
                     return MenuType.GetStoreFrontOrders;
                 case "12":
-                    return MenuType.GetProduct;
-                case "13":
                     return MenuType.OrderHistory;
-                case "14":
+                case "13":
                     return MenuType.GetStoreFrontProducts;
-                case "15":
+                case "14":
                     return MenuType.Replenishinventory;
-                case "16":
+                case "15":
                     return MenuType.GeneralMenu;
                 default:
                     Console.WriteLine("Please input a valid response");

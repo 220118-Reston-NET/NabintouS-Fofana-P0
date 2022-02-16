@@ -39,7 +39,7 @@ namespace ShoppingUI
             switch (userInput)
             {
                 case "0":
-                    return MenuType.GeneralMenu;
+                    return MenuType.ManagerMainMenu;
                 case "1":
                       Log.Information("Adding order \n" + _newOrder);
                         _orderBL.AddOrder(_newOrder);
@@ -47,7 +47,7 @@ namespace ShoppingUI
                         Log.Information("Successful at adding the order!");
                         Console.WriteLine("Please press Enter to go back to the previous menu");
                         Console.ReadLine();
-                    return MenuType.GeneralMenu;
+                    return MenuType.ManagerMainMenu;
                     
                 case "2":
                     Console.WriteLine("Please enter the order id!");

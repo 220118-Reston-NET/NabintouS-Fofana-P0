@@ -37,7 +37,7 @@ namespace ShoppingUI
             switch (userInput)
             {
                 case "0":
-                    return MenuType.GeneralMenu;
+                    return MenuType.ManagerMainMenu;
                 case "1":
                     
                     Log.Information("Adding new customer " + _newCustomer);

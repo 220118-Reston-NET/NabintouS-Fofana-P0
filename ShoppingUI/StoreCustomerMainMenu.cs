@@ -31,11 +31,11 @@ namespace ShoppingUI
                 case "2":
                     return MenuType.GetCustomerOrder;
                 case "3":
-                    return MenuType.GetAllProducts;
+                    return MenuType.GetStoreFrontProducts;
                 case "4":
                     return MenuType.SearchProduct;
                 case "5":
-                    return MenuType.GeneralMenu;
+                    return MenuType.CustomerMainMenu;
                 default:
                     Console.WriteLine("Please input a valid response");
                     Console.WriteLine("Please press Enter to continue");

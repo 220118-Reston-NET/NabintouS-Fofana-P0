@@ -50,10 +50,10 @@ namespace ShoppingUI
                     Console.WriteLine("Store inventory has been replenished!");
                     Log.Information("Item successfully replenished.");
                     Console.ReadLine();
-                    return MenuType.Replenishinventory;
+                    return MenuType.ManagerMainMenu;
                 case "0":
                     Log.Information("Back to the main menu.");
-                    return MenuType.GeneralMenu;
+                    return MenuType.ManagerMainMenu;
                 default:
                     Console.WriteLine("You entered an illegal character! Please try again.");
                     Log.Warning("User entered an illegal menu option.");

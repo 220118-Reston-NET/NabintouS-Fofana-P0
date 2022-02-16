@@ -18,7 +18,7 @@ namespace ShoppingDL
         // Adding product
         public Product AddProduct(Product b_product)
         {
-            string sqlQuery = @"insert into Product values(@ProductID, @ProductName, @ProductDescription, @ProductQuantity, @ProductPrice,)";
+            string sqlQuery = @"insert into Product values(@productID, @productName, @productDescription, @productQuantity, @productPrice)";
  
             using (SqlConnection con = new SqlConnection(_connectionStrings))
             {
@@ -62,7 +62,7 @@ namespace ShoppingDL
                         ProductID = reader.GetString(0), //It will get column ProductID since that is the very first column of our select statement
                         ProductName = reader.GetString(1), //it will get the ProductName column since it is the second column of our select statement
                         ProductDescription = reader.GetString(2),
-                        ProductQuantity = reader.GetInt32(3),
+                        ProductQuantity = reader.GetString(3),
                         ProductPrice = reader.GetInt32(4),
                     });
                 }
@@ -75,10 +75,10 @@ namespace ShoppingDL
         public List<Product> GetAllProductsFromStore(String b_storeID)
         {
             List<Product> _listOfProducts = new List<Product>();
-      string _sqlQuery = @"SELECT product.productID, product.productName, product.productPrice, product.productDescription, product.productQuantity FROM Products product, StoreFront storef, Inventory inv
-                          WHERE product.productID = inv.productID 
-                            AND storef.storeID = inv.storeID
-                            AND storef.storeID = @storeID";
+      string _sqlQuery = @"SELECT p.productID, p.productName, p.productPrice, p.productDescription, p.productQuantity FROM Products p, StoreFront sf, Inventory i
+                          WHERE product.productID = i.productID 
+                            AND sf.storeID = i.storeID
+                            AND sf.storeID = @storeID";
 
       using (SqlConnection con = new SqlConnection(_connectionStrings))
       {
@@ -96,7 +96,7 @@ namespace ShoppingDL
             ProductID = reader.GetString(0),
             ProductName = reader.GetString(1),
             ProductDescription = reader.GetString(2),
-            ProductQuantity = reader.GetInt32(3),
+            ProductQuantity = reader.GetString(3),
             ProductPrice = reader.GetInt32(4),
           });
         }
@@ -197,7 +197,7 @@ namespace ShoppingDL
                         ProductID = reader.GetString(0), //It will get column ProductID since that is the very first column of our select statement
                         ProductName = reader.GetString(1), //it will get the ProductName column since it is the second column of our select statement
                         ProductDescription = reader.GetString(2),
-                        ProductQuantity = reader.GetInt32(3),
+                        ProductQuantity = reader.GetString(3),
                         ProductPrice = reader.GetInt32(4),
                     });
 
@@ -300,7 +300,7 @@ namespace ShoppingDL
             CustomerName = reader.GetString(1),
             CustomerAddress = reader.GetString(2),
             CustomerEmail = reader.GetString(3),
-            Orders = GetOrderByCustomerID(reader.GetString(0))
+            //Orders = GetOrderByCustomerID(reader.GetString(0))
           });
         }
       }
@@ -395,10 +395,11 @@ namespace ShoppingDL
         {
           listOfLineItems.Add(new LineItem()
           {
-            ProductID = reader.GetString(0),
-            OrderID = reader.GetString(3),
-            ProductQuantity = reader.GetInt32(2),
-            ProductName = reader.GetString(1)
+            LineItemID = reader.GetString(0),
+                        ProductID = reader.GetString(2),
+                        OrderID = reader.GetString(1),
+                        ProductQuantity = reader.GetString(4),
+                        ProductName = reader.GetString(3)
           });
         }
       }
@@ -428,10 +429,11 @@ namespace ShoppingDL
                 {
                     listOfLineItem.Add(new LineItem(){
                         //Reader column is NOT based on table structure but based on what your select query statement is displaying
-                        ProductID = reader.GetString(0),
-                        OrderID = reader.GetString(3),
-                        ProductQuantity = reader.GetInt32(2),
-                        ProductName = reader.GetString(1)
+                        LineItemID = reader.GetString(0),
+                        ProductID = reader.GetString(2),
+                        OrderID = reader.GetString(1),
+                        ProductQuantity = reader.GetString(4),
+                        ProductName = reader.GetString(3)
                     });
                 }
             }
@@ -462,7 +464,7 @@ namespace ShoppingDL
             StoreID = reader.GetString(2),
             StoreLocation = reader.GetString(3),
             TotalPrice = reader.GetInt32(4),
-            LineItems = GetLineItemsByOrderId(reader.GetString(0))
+           // LineItems = GetLineItemsByOrderId(reader.GetString(0))
           });
         }
       }
@@ -527,7 +529,7 @@ namespace ShoppingDL
                         OrderID = reader.GetString(1),
                         ProductID = reader.GetString(2),
                         ProductName = reader.GetString(3),
-                        ProductQuantity = reader.GetInt32(4)
+                        ProductQuantity = reader.GetString(4)
                     });
                 }
             }
@@ -624,8 +626,8 @@ namespace ShoppingDL
             StoreID = reader.GetString(0),
             StoreName = reader.GetString(1),
             StoreLocation = reader.GetString(2),
-            Orders = GetOrderByStoreFrontID(reader.GetString(0)),
-            Products = GetProductByStoreFrontID(reader.GetString(0)),
+            //Orders = GetOrderByStoreFrontID(reader.GetString(0)),
+            //Products = GetProductByStoreFrontID(reader.GetString(0)),
           });
         }
         }
@@ -666,10 +668,12 @@ namespace ShoppingDL
         public List<Order> GetOrderByStoreFrontID(string b_storefrontID)
         {
             
-            string sqlQuery = @"select o.orderID ,o.customerID , o.storeID , o.storeLocation , o.totalPrice from StoreFront s 
-                            inner join storeFront_orders so on s.storeID = so.storeID 
-                            inner join Orders o on o.orderID = so.orderID 
-                            where s.storeID = @storeID";
+            string sqlQuery = @"select o.orderID ,o.customerID , o.storeID , o.storeLocation , o.totalPrice from StoreFront sf 
+                            inner join storeFront_orders sfo on sf.storeID = sfo.storeID 
+                            inner join Orders o on o.orderID = sfo.orderID 
+                            where sf.storeID = @storeID";
+
+                            
             List<Order> listOfOrder = new List<Order>();
             using (SqlConnection con = new SqlConnection(_connectionStrings))
             {
@@ -699,10 +703,10 @@ namespace ShoppingDL
         public List<Product> GetProductByStoreFrontID(string b_storefrontID)
         {
             
-            string sqlQuery = @"select p.productID ,p.productName , p.productDescription , p.productQuantity , p.productPrice from StoreFront s
-                            inner join storeFront_product sp on s.storeID = sp.storeID 
-                            inner join Product p on p.productID = sp.productID 
-                            where s.storeID = @storeID";
+            string sqlQuery = @"select p.productID ,p.productName , p.productDescription , p.productQuantity , p.productPrice from StoreFront sf
+                            inner join storeFront_product sfp on sf.storeID = sfp.storeID 
+                            inner join Product p on p.productID = sfp.productID 
+                            where sf.storeID = @storeID";
             List<Product> listOfProduct = new List<Product>();
             using (SqlConnection con = new SqlConnection(_connectionStrings))
             {
@@ -720,7 +724,7 @@ namespace ShoppingDL
                         ProductID = reader.GetString(0), //It will get column ProductID since that is the very first column of our select statement
                         ProductName = reader.GetString(1), //it will get the ProductName column since it is the second column of our select statement
                         ProductDescription = reader.GetString(2),
-                        ProductQuantity = reader.GetInt32(3),
+                        ProductQuantity = reader.GetString(3),
                         ProductPrice = reader.GetInt32(4),
                     });
                 }
@@ -732,10 +736,10 @@ namespace ShoppingDL
         public List<Inventory> GetInventoryByStoreFrontID(string b_storefrontID)
         {
             
-            string sqlQuery = @"select i.inventoryID ,i.storeID ,i.storeName ,i.productID ,i.productName ,i.productQuantity from StoreFront s
-                            inner join storeFront_inventory si on s.storeID = si.storeID 
-                            inner join Inventory i on i.inventoryID = si.inventoryID 
-                            where s.storeID = @storeID";
+            string sqlQuery = @"select i.inventoryID ,i.storeID ,i.storeName ,i.productID ,i.productName ,i.productQuantity from StoreFront sf
+                            inner join storeFront_inventory sfi on sf.storeID = sfi.storeID 
+                            inner join Inventory i on i.inventoryID = sfi.inventoryID 
+                            where sf.storeID = @storeID";
             List<Inventory> listOfInventory = new List<Inventory>();
             using (SqlConnection con = new SqlConnection(_connectionStrings))
             {
@@ -847,7 +851,7 @@ namespace ShoppingDL
                         OrderID = reader.GetString(1), //it will get the ProductName column since it is the second column of our select statement
                         ProductID = reader.GetString(2),
                         ProductName = reader.GetString(3),
-                        ProductQuantity = reader.GetInt32(4),
+                        ProductQuantity = reader.GetString(4),
                     });
                 }
             }

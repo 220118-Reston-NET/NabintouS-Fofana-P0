@@ -52,7 +52,7 @@ while (repeat)
             
         case MenuType.GetAllProducts:
             Log.Information("Displaying AddOrder Menu to user");
-            menu = new GetAllProducts(new ProductBL(new SQLRepository_p(_connectionStrings)));
+            menu = new GetAllProductsMenu(new ProductBL(new SQLRepository_p(_connectionStrings)));
             break;
             
         case MenuType.GetOrderLineitems:

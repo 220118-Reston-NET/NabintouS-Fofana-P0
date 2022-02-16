@@ -6,7 +6,7 @@ public class Product
     public string ProductName { get; set; }
     public string ProductDescription { get; set; }
 
-    public int ProductQuantity { get; set; }
+    public string ProductQuantity { get; set; }
     public int ProductPrice { get; set; }
     
         //Default constructor to add default values to the properties
@@ -15,7 +15,7 @@ public class Product
             ProductID = "";
             ProductName = "";
             ProductDescription = "";
-            ProductQuantity = 0;
+            ProductQuantity = "";
             ProductPrice = 0;
         }
 

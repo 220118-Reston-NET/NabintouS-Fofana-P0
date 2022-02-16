@@ -41,7 +41,7 @@ namespace ShoppingUI
             switch (userInput)
             {
                 case "0":
-                    return MenuType.MainMenu;
+                    return MenuType.ManagerMainMenu;
                 case "1":
                     Console.WriteLine("Enter StoreID:");
 
@@ -58,7 +58,7 @@ namespace ShoppingUI
                           Console.WriteLine("Please press Enter to continue");
                         Console.ReadLine();
 
-                        return MenuType.MainMenu;
+                        return MenuType.ManagerMainMenu;
                     }
                     catch (FormatException)
                     {

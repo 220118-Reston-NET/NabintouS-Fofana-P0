@@ -39,7 +39,7 @@ namespace ShoppingUI
             switch (userInput)
             {
                 case "0":
-                     return MenuType.GeneralMenu;
+                     return MenuType.ManagerMainMenu;;
                 case "1":
                    _inventoryBL.AddInventory(_newInventory);
                     return MenuType.ManagerMainMenu;

@@ -25,7 +25,7 @@ namespace ShoppingUI
             switch (userInput)
             {
                 case "0":
-                    return MenuType.GeneralMenu;
+                    return MenuType.ManagerMainMenu;
                 case "1":
             
                     //Logic to grab user input
@@ -44,7 +44,7 @@ namespace ShoppingUI
                     
                     Console.WriteLine("Please press Enter to continue");
                     Console.ReadLine();
-                    return  MenuType.GeneralMenu;
+                    return MenuType.ManagerMainMenu;
                 default:
                     Console.WriteLine("Please input a valid response");
                     Console.WriteLine("Please press Enter to continue");

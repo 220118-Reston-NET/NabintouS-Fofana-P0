@@ -36,7 +36,7 @@ namespace ShoppingUI
             switch (userInput)
             {
                 case "0":
-                    return MenuType.GeneralMenu;
+                    return MenuType.ManagerMainMenu;
                 case "1":
                      Log.Information("Adding Store front information \n" + _newStoreFront);
                         _storefrontBL.AddStoreFront(_newStoreFront);
@@ -44,7 +44,7 @@ namespace ShoppingUI
                         Log.Information("Successful at adding Store front information!");
                         Console.WriteLine("Please press Enter to go back to the previous menu");
                         Console.ReadLine();
-                    return MenuType.GeneralMenu;
+                    return MenuType.ManagerMainMenu;
                 case "2":
                     Console.WriteLine("Please enter the store id!");
                     _newStoreFront.StoreID = Console.ReadLine();

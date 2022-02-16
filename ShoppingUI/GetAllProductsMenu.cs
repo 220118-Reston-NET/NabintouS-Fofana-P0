@@ -3,11 +3,11 @@ using ShoppingModel;
 
 namespace ShoppingUI
 {
-    public class GetAllProducts : IMenu
+    public class GetAllProductsMenu : IMenu
     {
         private List<Product> _listOfProduct;
         private IProductBL _productBL;
-        public GetAllProducts(IProductBL b_productBL)
+        public GetAllProductsMenu(IProductBL b_productBL)
         {
             _productBL = b_productBL;
             _listOfProduct = _productBL.GetAllProduct();
@@ -34,7 +34,7 @@ namespace ShoppingUI
             switch (userInput)
             {
                 case "0":
-                    return MenuType.GeneralMenu;
+                    return MenuType.ManagerMainMenu;
                 case "1":
                     Console.WriteLine("Enter product ID:");
 
@@ -51,9 +51,8 @@ namespace ShoppingUI
 
                         Console.WriteLine("Please press Enter to continue");
                         Console.ReadLine();
-                        //return MenuType.PlaceOrder;
-
-                        return MenuType.StoreCustomerMenu;
+                
+                        return MenuType.ManagerMainMenu;
                     }
                     catch (FormatException)
                     {
