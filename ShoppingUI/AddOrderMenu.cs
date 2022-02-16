@@ -41,13 +41,25 @@ namespace ShoppingUI
                 case "0":
                     return MenuType.ManagerMainMenu;
                 case "1":
-                      Log.Information("Adding order \n" + _newOrder);
+                      //Exception handling to have a better user experience
+                    try
+                    {
+                        Log.Information("Adding order \n" + _newOrder);
                         _orderBL.AddOrder(_newOrder);
                         Console.WriteLine("Order placed");
                         Log.Information("Successful at adding the order!");
                         Console.WriteLine("Please press Enter to go back to the previous menu");
                         Console.ReadLine();
-                    return MenuType.ManagerMainMenu;
+                    }
+                    catch (System.Exception exc)
+                    {
+                        Log.Warning("Failed to add book due to reaching total capacity (500)");
+                        Console.WriteLine(exc.Message);
+                        Console.WriteLine("Please press Enter to continue");
+                        Console.ReadLine();
+                    }
+                    return MenuType.GeneralMenu;
+                     
                     
                 case "2":
                     Console.WriteLine("Please enter the order id!");

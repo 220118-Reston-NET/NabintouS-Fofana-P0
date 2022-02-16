@@ -13,13 +13,12 @@ namespace ShoppingBL
 
         public Product AddProduct(Product b_product)
         {
-            //Validation process
-           
-            List<Product> listOfProduct = _repo_p.GetAllProduct();
-      
-            // //return the filtered/another list
-            return _repo_p.AddProduct(b_product);
+         List<Product> listOfProduct = _repo_p.GetAllProduct();
+         return _repo_p.AddProduct(b_product);
+            
         }
+            // //return the filtered/another list
+            
 
         public List<Product> GetAllProduct()
         {
@@ -164,8 +163,15 @@ namespace ShoppingBL
         {
             
             List<Order> listOfOrder = _repo_o.GetAllOrder();
-    
-            return _repo_o.AddOrder(b_order);
+            if(listOfOrder.Count < 500)
+            {
+                return _repo_o.AddOrder(b_order);
+            }
+            else
+            {
+                throw new Exception("You cannot have more than 500 orders!");
+            }
+        
         }
 
         
